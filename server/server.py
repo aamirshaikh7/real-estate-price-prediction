@@ -3,18 +3,19 @@ import util
 
 app = Flask(__name__)
 
+
 @app.route('/get-location')
-def get_location_names() :
+def get_location_names():
     response = jsonify({
         'locations': util.get_location_names()
     })
-
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response
 
-@app.route('/predict-price', methods = ['POST'])
-def predict_price() :
+
+@app.route('/predict-price', methods=['POST'])
+def predict_price():
     location = request.form['location']
     area = float(request.form['area'])
     bhk = int(request.form['bhk'])
@@ -26,13 +27,16 @@ def predict_price() :
     swimming_pool = int(request.form['swimming_pool'])
 
     response = jsonify({
-        'estimate_price': util.get_estimated_price(location, area, bhk, gym, lift, car_parking, security, playground, swimming_pool)
+        'estimate_price': util.get_estimated_price(location, area, bhk, gym, lift, car_parking, security, playground,
+                                                   swimming_pool)
     })
 
     response.headers.add('Access-Control-Allow-Origin', '*')
 
     return response
 
-if __name__ == "__main__" :
+
+if __name__ == "__main__":
     print("Starting Flask Server for Home Price Prediction")
+    util.load_saved_artifacts()
     app.run()
