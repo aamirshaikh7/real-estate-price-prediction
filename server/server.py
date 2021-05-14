@@ -27,7 +27,7 @@ def predict_price():
     swimming_pool = int(request.form['swimming_pool'])
 
     response = jsonify({
-        'estimate_price': util.get_estimated_price(location, area, bhk, gym, lift, car_parking, security, playground,
+        'estimated_price': util.get_estimated_price(location, area, bhk, gym, lift, car_parking, security, playground,
                                                    swimming_pool)
     })
 
