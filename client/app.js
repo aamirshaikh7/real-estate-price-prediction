@@ -5,7 +5,7 @@ function getBHKValue() {
             return parseInt(i)+1;
         }
     }
-    return -1; // Invalid Value
+    return -1;
 }
 
 function getGymValue() {
@@ -15,7 +15,7 @@ function getGymValue() {
             return parseInt(i)+1;
         }
     }
-    return -1; // Invalid Value
+    return -1;
 }
 
 function getLiftValue() {
@@ -25,7 +25,7 @@ function getLiftValue() {
             return parseInt(i)+1;
         }
     }
-    return -1; // Invalid Value
+    return -1;
 }
 
 function getParkingValue() {
@@ -35,7 +35,7 @@ function getParkingValue() {
             return parseInt(i)+1;
         }
     }
-    return -1; // Invalid Value
+    return -1;
 }
 
 function getSecurityValue() {
@@ -45,7 +45,7 @@ function getSecurityValue() {
             return parseInt(i)+1;
         }
     }
-    return -1; // Invalid Value
+    return -1;
 }
 
 function getPlaygroundValue() {
@@ -55,7 +55,7 @@ function getPlaygroundValue() {
             return parseInt(i)+1;
         }
     }
-    return -1; // Invalid Value
+    return -1;
 }
 
 function getSwimmingPoolValue() {
@@ -65,7 +65,7 @@ function getSwimmingPoolValue() {
             return parseInt(i)+1;
         }
     }
-    return -1; // Invalid Value
+    return -1;
 }
 
 function onClickedEstimatePrice() {
@@ -83,23 +83,30 @@ function onClickedEstimatePrice() {
 
     var location = document.getElementById("idLocation");
     var estPrice = document.getElementById("idEstimatedPrice");
-  
-    var url = "http://127.0.0.1:5000/predict-price"; //Use this if you are NOT using nginx which is first 7 tutorials
-    // var url = "/api/predict_home_price"; // Use this if  you are using nginx. i.e tutorial 8 and onwards
+    var cardLocation = document.getElementById("card-location");
+    var cardVisit = document.getElementById("card-visit");
+    var cardDirections = document.getElementById("card-directions");
+
+    var url = "http://127.0.0.1:5000/predict-price";
+    // var url = "/api/predict_home_price";
   
     $.post(url, {
-        total_sqft: parseFloat(sqft.value),
+        location: location.value,
+        area: parseFloat(sqft.value),
         bhk: bhk,
         gym: gym,
         lift: lift,
-        parking: parking,
+        car_parking: parking,
         security: security,
         playground: playground,
-        swimming_pool: swimming_pool,
-        location: location.value
+        swimming_pool: swimming_pool
     },function(data, status) {
         console.log(data.estimated_price);
-        estPrice.innerHTML = "<h2>" + data.estimated_price.toString() + "</h2>";
+
+        cardLocation.innerHTML = location.value;
+        estPrice.innerHTML = "₹ " + data.estimated_price.toString();
+        cardVisit.innerHTML = "Visit " + location.value;
+        cardDirections.innerHTML = "<a href='https://www.google.com/maps/place/"+location.value+"'>Get Directions</a>";
         console.log(status);
     });
 }

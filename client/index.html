@@ -122,7 +122,18 @@
                 <div class="form-group">
                     <button class="btn btn-primary text-uppercase submit" onclick="onClickedEstimatePrice()" type="button">Check estimated price</button><br>
                 </div>
-                <div id="idEstimatedPrice" class="result"><h2></h2></div>
+                <div class="card result">
+                    <div class="card-body">
+                        <h4 class="card-title">Estimate Price</h4>
+                        <h6 class="text-muted card-subtitle mb-2" id="card-location"></h6>
+                        <p class="card-text" id="idEstimatedPrice"></p>
+                        <h6 class="text-muted card-subtitle mb-2"></h6>
+                        <div id="card-directions">
+                            <a href="https://www.google.com/maps">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+<!--                <div id="idEstimatedPrice" class="result"><h2></h2></div>-->
             </form>
         </section>
         <section class="clean-block slider dark">
